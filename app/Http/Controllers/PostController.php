@@ -2,16 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\storeUpdatePost;
 use App\Models\Post;
-use Illuminate\Http\Request;
 
 class PostController extends Controller
 {
     public function index()
     {
         $posts = Post::get();
-
-        //dd($posts);
 
         return view('admin.posts.index', compact('posts'));
     }
@@ -21,11 +19,11 @@ class PostController extends Controller
         return view('admin.posts.create');
     }
 
-    public function store(Request $request)
+    public function store(storeUpdatePost $request)
     {
 
         Post::create($request->all());
 
-        return redirect(route('posts.index'));
+        return redirect()->route('posts.index');
     }
 }
